@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box {
+            padding: 50px 0;
+            width: 200px;
+            text-align: center;
+            background: #ddd;
+            margin: 10px;
+            display: inline-block;
+        }
+        body {
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+        p, h3, ul {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        li.fav {
+            background: #777;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vue JS Intro</h1>
+    
+    <br>
+    
+    <div id="app">
+
+        <!-- click events -->
+        <div v-show="showTitle">
+            <p>{{ title }} - {{ age }}</p>
+        </div>
+
+        <br>
+
+        <button @click="toggleTitle">
+            <span v-if="showTitle">Hide Title</span>
+            <span v-else>Show Title</span>
+        </button>
+        
+        <button @click="age++">Increase age</button>
+        <button v-on:click="age--">Decrease age</button>
+        
+        <br><br>
+        
+        <div @click="changeTitle('New Tilte', '28')">click to change title</div>
+
+        <br><br>
+
+        <!-- mouse events -->
+        <div class="box" @mouseover="handleEvents($event, 5)">mouseover</div>
+        <div class="box" @mouseleave="handleEvents">mouseleave</div>
+        <div class="box" @dblclick="handleEvents">double click</div>
+        <div class="box" @mousemove="handleMousemove">{{x}} {{y}}</div>
+
+        <!-- v-for -->
+        <div>
+            <ul>
+                <li v-for="book in filteredBooks" @click="toggleFav(book)" :class="{ fav: book.isFav }">    <!-- to see full book list use (v-for="book in books)" -->
+                    <img :src="book.img" :alt="book.title">
+                    <h4>{{ book.title }}</h4>
+                    <p>{{ book.author }}</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- attribute/Data binding - when we bind dinamic values to HTML Attribute -->
+        <a v-bind:href="url">Google Link</a>
+
+    </div>
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
